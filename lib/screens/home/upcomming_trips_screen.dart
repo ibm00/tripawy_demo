@@ -31,21 +31,24 @@ class _UpcommingTripsScreenState extends State<UpcommingTripsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: futureBox,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting)
-          return SplashScreen();
-        else if (snapshot.error != null)
-          return Scaffold(
-            body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Upcomming Trips'),
+      ),
+      body: FutureBuilder(
+        future: futureBox,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting)
+            return SplashScreen();
+          else if (snapshot.error != null)
+            return Center(
               child: Text("error happend"),
-            ),
-          );
-        else {
-          return UpcommingTripsScreen();
-        }
-      },
+            );
+          else {
+            return Container();
+          }
+        },
+      ),
     );
   }
 }
