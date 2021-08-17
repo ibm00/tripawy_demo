@@ -33,7 +33,7 @@ class _UpcommingTripsScreenState extends State<UpcommingTripsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upcomming Trips'),
+        title: const Text('Upcomming Trips'),
       ),
       body: FutureBuilder(
         future: futureBox,

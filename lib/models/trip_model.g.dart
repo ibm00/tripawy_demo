@@ -8,7 +8,7 @@ part of 'trip_model.dart';
 
 class TripAdapter extends TypeAdapter<Trip> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
   Trip read(BinaryReader reader) {
@@ -23,13 +23,14 @@ class TripAdapter extends TypeAdapter<Trip> {
       startDate: fields[3] as DateTime?,
       startPoint: fields[1] as String?,
       way: fields[5] as Way?,
+      notes: (fields[6] as List?)?.cast<String?>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Trip obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class TripAdapter extends TypeAdapter<Trip> {
       ..writeByte(4)
       ..write(obj.repeating)
       ..writeByte(5)
-      ..write(obj.way);
+      ..write(obj.way)
+      ..writeByte(6)
+      ..write(obj.notes);
   }
 
   @override

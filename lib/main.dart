@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import 'models/history_model.dart';
 import 'models/trip_model.dart';
+
 import 'screens/home/upcomming_trips_screen.dart';
 
 void main() {
   Hive.initFlutter();
   Hive.registerAdapter(TripAdapter());
+  Hive.registerAdapter(HistoryAdapter());
   runApp(MyApp());
 }
 

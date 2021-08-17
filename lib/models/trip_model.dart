@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import '../constants.dart';
 part 'trip_model.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 2)
 class Trip extends HiveObject {
   @HiveField(0)
   String? name;
@@ -17,6 +17,8 @@ class Trip extends HiveObject {
   Repeating? repeating;
   @HiveField(5)
   Way? way;
+  @HiveField(6)
+  List<String?>? notes;
   Trip({
     required this.endPoint,
     required this.name,
@@ -24,5 +26,8 @@ class Trip extends HiveObject {
     required this.startDate,
     required this.startPoint,
     required this.way,
+    required this.notes,
   });
 }
+
+//used typId{0}
