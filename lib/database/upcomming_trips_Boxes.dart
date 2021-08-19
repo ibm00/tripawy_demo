@@ -8,8 +8,13 @@ class UpcommingTripsBox {
     _tripsBox.add(trip);
   }
 
-  static void modifyTripInBox(Trip trip) {
-    trip.save();
+  static void modifyTripInBox(Trip modifiedTrip, Trip oldTrip) {
+    oldTrip.name = modifiedTrip.name;
+    oldTrip.startPoint = modifiedTrip.startPoint;
+    oldTrip.endPoint = modifiedTrip.endPoint;
+    oldTrip.startDate = modifiedTrip.startDate;
+
+    oldTrip.save();
   }
 
   static void deleteTripFromBox(Trip trip) {

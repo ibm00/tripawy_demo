@@ -12,7 +12,10 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
   Future? futureBox;
   Future _futureBoxFun() async {
-    return await Hive.openBox('past_trips');
+    return await Hive.openBox(
+      'past_trips',
+      compactionStrategy: (entries, deletedEntries) => deletedEntries > 20,
+    );
   }
 
   @override
@@ -23,7 +26,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   void dispose() {
-    Hive.close();
+    Hive.box('past_trips').compact();
+    Hive.box('past_trips').close();
     super.dispose();
   }
 

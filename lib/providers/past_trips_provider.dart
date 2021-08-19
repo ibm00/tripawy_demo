@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tripawy_demo/database/past_trips_Boxes.dart';
 import 'package:tripawy_demo/models/history_model.dart';
-import 'package:tripawy_demo/models/trip_model.dart';
 
 final historyProv = ChangeNotifierProvider((ref) => _HistoryProvider());
 
