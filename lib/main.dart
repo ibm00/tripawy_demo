@@ -35,31 +35,9 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Future? _openTheBoxAndFetchData;
-  Future _futureBoxFun() async {
-    return await context.read(upcommingTripsProv).fetchTrips();
-  }
-
-  @override
-  void initState() {
-    _openTheBoxAndFetchData = _futureBoxFun();
-    print('opend');
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    Hive.box<Trip>('upcomming_trips').compact();
-    Hive.box<Trip>('upcomming_trips').close();
-    print('closed');
-    super.dispose();
+class MyApp extends StatelessWidget {
+  Future _futureBoxFun(BuildContext ctx) async {
+    return await ctx.read(upcommingTripsProv).fetchTrips();
   }
 
   @override
@@ -84,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: [Locale('en', 'US')],
       home: FutureBuilder(
-        future: _openTheBoxAndFetchData,
+        future: _futureBoxFun(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return SplashScreen();
