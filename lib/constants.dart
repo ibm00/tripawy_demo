@@ -12,3 +12,17 @@ class AppColors {
   static Color dividerColor = Color(0xFFBDBDBD);
   static Color? backgroundColor = Colors.yellow[100];
 }
+
+class AppStyles {
+  static OutlineInputBorder myFocusedBorder = OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.brown,
+    ),
+    borderRadius: BorderRadius.circular(20.0),
+  );
+  static TextStyle myHintSyle = TextStyle(
+    fontStyle: FontStyle.italic,
+    color: Colors.grey,
+    fontSize: 17,
+  );
+}

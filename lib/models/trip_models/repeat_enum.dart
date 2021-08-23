@@ -18,3 +18,4 @@ enum Repeating {
 }
 
 // 3 & 100 id is used
+//last used typId is 6

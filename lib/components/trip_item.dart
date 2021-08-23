@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:tripawy_demo/components/toast.dart';
-import 'package:tripawy_demo/constants.dart';
-import 'package:tripawy_demo/models/trip_model.dart';
-import 'package:tripawy_demo/providers/upcomming_trips_provider.dart';
-import 'package:tripawy_demo/screens/home/add_trip_screen.dart';
+import 'notes_dialog.dart';
+import 'toast.dart';
+import '../constants.dart';
+import '../models/trip_models/trip_model.dart';
+import '../providers/upcoming_trips_provider.dart';
+import '../screens/home/trip_notes_screen.dart';
+import '../screens/home/add_trip_screen.dart';
 
 enum PopUpOptions { notes, edit, delete, cancel }
 
@@ -127,8 +129,6 @@ class TripItem extends StatelessWidget {
                     ),
                     Divider(endIndent: 40, thickness: 2),
                     Row(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           flex: 4,
@@ -155,7 +155,13 @@ class TripItem extends StatelessWidget {
                                 bottom: cardWidth > 510 ? cardWidth * .04 : 0,
                               ),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        NotesDialog(_trip.key),
+                                  );
+                                },
                                 icon: Icon(
                                   Icons.note,
                                   size: cardWidth * .1,
@@ -186,7 +192,10 @@ class TripItem extends StatelessWidget {
   _doThisInstruction(PopUpOptions selectedOption, BuildContext ctx) {
     switch (selectedOption) {
       case PopUpOptions.notes:
-        {}
+        {
+          Navigator.of(ctx)
+              .pushNamed(NotesScreen.routeName, arguments: _trip.key);
+        }
         break;
       case PopUpOptions.edit:
         {

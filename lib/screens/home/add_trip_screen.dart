@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:tripawy_demo/components/toast.dart';
+import '../../components/toast.dart';
 
-import 'package:tripawy_demo/constants.dart';
-import 'package:tripawy_demo/helpers/validator_helper.dart';
-import 'package:tripawy_demo/models/repeat_enum.dart';
-import 'package:tripawy_demo/models/trip_model.dart';
-import 'package:tripawy_demo/models/way_enum.dart';
-import 'package:tripawy_demo/providers/upcomming_trips_provider.dart';
+import '../../constants.dart';
+import '../../helpers/validator_helper.dart';
+import '../../models/trip_models/repeat_enum.dart';
+import '../../models/trip_models/trip_model.dart';
+import '../../models/trip_models/way_enum.dart';
+import '../../providers/upcoming_trips_provider.dart';
 
 class AddTripScreen extends StatefulWidget {
   static const routName = 'add-trip';
@@ -53,20 +52,20 @@ class _AddTripScreenState extends State<AddTripScreen> {
 
   Way? _way;
 
-  final _myFocusedBorder = OutlineInputBorder(
-    borderSide: BorderSide(
-      color: Colors.brown,
-    ),
-    borderRadius: BorderRadius.circular(20.0),
-  );
+  // final _myFocusedBorder = OutlineInputBorder(
+  //   borderSide: BorderSide(
+  //     color: Colors.brown,
+  //   ),
+  //   borderRadius: BorderRadius.circular(20.0),
+  // );
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle _myHintSyle = TextStyle(
-      fontStyle: FontStyle.italic,
-      color: Colors.grey,
-      fontSize: 17,
-    );
+    // final TextStyle _myHintSyle = TextStyle(
+    //   fontStyle: FontStyle.italic,
+    //   color: Colors.grey,
+    //   fontSize: 17,
+    // );
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
@@ -97,17 +96,13 @@ class _AddTripScreenState extends State<AddTripScreen> {
                     initialValue: _name,
                     onSaved: (name) {
                       _name = name;
-                      // if (_isEdit)
-                      //   widget._trip!.name = name;
-                      // else
-                      //   _name = name;
                     },
                     validator: (value) =>
                         ValidatorHelper.isEmptyValidator(value),
                     decoration: InputDecoration(
-                      focusedBorder: _myFocusedBorder,
+                      focusedBorder: AppStyles.myFocusedBorder,
                       hintText: 'Enter trip name...',
-                      hintStyle: _myHintSyle,
+                      hintStyle: AppStyles.myHintSyle,
                     ),
                   ),
                   SizedBox(height: 25),
@@ -122,17 +117,13 @@ class _AddTripScreenState extends State<AddTripScreen> {
                     initialValue: _startPoint,
                     onSaved: (start) {
                       _startPoint = start;
-                      // if (_isEdit)
-                      //   widget._trip!.startPoint = start;
-                      // else
-                      //   _startPoint = start;
                     },
                     validator: (value) =>
                         ValidatorHelper.isEmptyValidator(value),
                     decoration: InputDecoration(
-                      focusedBorder: _myFocusedBorder,
+                      focusedBorder: AppStyles.myFocusedBorder,
                       hintText: 'Enter start point...',
-                      hintStyle: _myHintSyle,
+                      hintStyle: AppStyles.myHintSyle,
                     ),
                   ),
                   SizedBox(height: 25),
@@ -147,18 +138,14 @@ class _AddTripScreenState extends State<AddTripScreen> {
                     initialValue: _endPoint,
                     onSaved: (endPoint) {
                       _endPoint = endPoint;
-                      // if (_isEdit)
-                      //   widget._trip!.endPoint = endPoint;
-                      // else
-                      //   _endPoint = endPoint;
                     },
                     validator: (value) =>
                         ValidatorHelper.isEmptyValidator(value),
                     decoration: InputDecoration(
-                      focusedBorder: _myFocusedBorder,
+                      focusedBorder: AppStyles.myFocusedBorder,
                       focusColor: AppColors.darkPrimaryColor,
                       hintText: 'Enter end point...',
-                      hintStyle: _myHintSyle,
+                      hintStyle: AppStyles.myHintSyle,
                     ),
                   ),
                   SizedBox(height: 50),
@@ -188,10 +175,6 @@ class _AddTripScreenState extends State<AddTripScreen> {
                         ValidatorHelper.dateTimeValidator(date),
                     onSaved: (date) {
                       _dateTime = DateTime.parse(date!);
-                      // if (_isEdit)
-                      //   widget._trip!.startDate = DateTime.parse(date!);
-                      // else
-                      //   _dateTime = DateTime.parse(date!);
                     },
                   ),
                   SizedBox(height: 50),

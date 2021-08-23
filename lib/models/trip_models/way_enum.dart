@@ -10,3 +10,5 @@ enum Way {
   @HiveField(1)
   Round,
 }
+
+//last used typId is 6

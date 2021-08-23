@@ -1,8 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:tripawy_demo/models/repeat_enum.dart';
-import 'package:tripawy_demo/models/way_enum.dart';
+import 'repeat_enum.dart';
+import 'way_enum.dart';
 
-import '../constants.dart';
 part 'trip_model.g.dart';
 
 @HiveType(typeId: 2)
@@ -20,7 +19,7 @@ class Trip extends HiveObject {
   @HiveField(5)
   Way? way;
   @HiveField(6)
-  List<String?>? notes = [];
+  List? notes = [];
   Trip({
     required this.endPoint,
     required this.name,
@@ -28,8 +27,9 @@ class Trip extends HiveObject {
     required this.startDate,
     required this.startPoint,
     required this.way,
-    this.notes,
-  });
+    List<String?>? notes,
+  }) : this.notes = notes ?? [];
 }
 
 //used typId{0}
+//last used typId is 6
