@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tripawy_demo/providers/history_provider.dart';
 import 'package:tripawy_demo/providers/upcoming_trips_provider.dart';
 import 'package:tripawy_demo/screens/history_screen.dart';
 import 'package:tripawy_demo/screens/splash-screen.dart';
 import 'constants.dart';
-import 'models/history_models/trip_state_enum.dart';
+import 'models/history_models/trip_state_enuum.dart';
 import 'models/trip_models/repeat_enum.dart';
 import 'models/trip_models/way_enum.dart';
+import 'notifications/notification_services.dart';
 import 'screens/home/add_trip_screen.dart';
 
 import 'models/history_models/history_model.dart';
@@ -18,15 +20,29 @@ import 'models/trip_models/trip_model.dart';
 
 import 'screens/home/trip_notes_screen.dart';
 import 'screens/home/upcoming_trips_screen.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
   Hive.registerAdapter(TripAdapter());
+  Hive.registerAdapter(TripStateAdapter());
   Hive.registerAdapter(HistoryAdapter());
   Hive.registerAdapter(RepeatingAdapter());
   Hive.registerAdapter(WayAdapter());
-  Hive.registerAdapter(TripStateAdapter());
+  await Hive.initFlutter();
+  AwesomeNotifications().initialize(
+    null,
+    [
+      NotificationChannel(
+        channelKey: 'schudualed-channel',
+        channelName: 'Schudualed Channel',
+        defaultColor: Colors.teal,
+        importance: NotificationImportance.High,
+        channelShowBadge: true,
+        locked: true,
+      ),
+    ],
+  );
   runApp(
     DevicePreview(
       enabled: false,
@@ -35,9 +51,31 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
-  Future _futureBoxFun(BuildContext ctx) async {
-    return await ctx.read(upcommingTripsProv).fetchTrips();
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future? _futureBoxVar;
+  Future _futureBoxFun() async {
+    await context.read(upcommingTripsProv).fetchTrips();
+    await context.read(historyProv).fetchPastTrips();
+    // ctx.read(upcommingTripsProv).checkForPastTrips();
+  }
+
+  @override
+  void initState() {
+    NotificationServices.displayedStreem(context);
+    _futureBoxVar = _futureBoxFun();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    AwesomeNotifications().displayedSink.close();
+    Hive.close();
+    super.dispose();
   }
 
   @override
@@ -62,7 +100,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [Locale('en', 'US')],
       home: FutureBuilder(
-        future: _futureBoxFun(context),
+        future: _futureBoxVar,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
             return SplashScreen();

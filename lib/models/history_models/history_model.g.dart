@@ -18,7 +18,7 @@ class HistoryAdapter extends TypeAdapter<History> {
     };
     return History(
       trip: fields[0] as Trip?,
-      state: fields[2] as TripState?,
+      isTripDone: fields[3] as bool?,
     );
   }
 
@@ -28,8 +28,8 @@ class HistoryAdapter extends TypeAdapter<History> {
       ..writeByte(2)
       ..writeByte(0)
       ..write(obj.trip)
-      ..writeByte(2)
-      ..write(obj.state);
+      ..writeByte(3)
+      ..write(obj.isTripDone);
   }
 
   @override

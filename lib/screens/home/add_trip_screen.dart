@@ -158,23 +158,33 @@ class _AddTripScreenState extends State<AddTripScreen> {
                   ),
                   DateTimePicker(
                     type: DateTimePickerType.dateTimeSeparate,
-                    dateMask: 'd MMM, yyyy',
+                    //dateMask: 'd MMM, yyyy',
                     initialValue: _dateTime.toString(),
-                    firstDate: DateTime(2000),
+                    initialTime: TimeOfDay(
+                      hour: DateTime.now().hour,
+                      minute: DateTime.now().minute + 1,
+                    ),
+                    firstDate: DateTime.now(),
                     lastDate: DateTime(2100),
                     icon: Icon(
                       Icons.event,
                       color: Theme.of(context).accentColor,
                     ),
-                    use24HourFormat: false,
+                    // use24HourFormat: false,
                     dateLabelText: 'Date',
                     timeLabelText: "Hour",
                     locale: Locale('en', 'US'),
-                    // onChanged: (val) => print(val),
                     validator: (date) =>
                         ValidatorHelper.dateTimeValidator(date),
                     onSaved: (date) {
-                      _dateTime = DateTime.parse(date!);
+                      String? tripDate =
+                          date!.replaceAll('AM', "").replaceAll('PM', "");
+
+                      // if (date!.length > 16) {
+                      //   tripDate = date.substring(0, 17);
+                      // }
+                      print("daaaaaaaaaaate: $tripDate");
+                      _dateTime = DateTime.parse(tripDate);
                     },
                   ),
                   SizedBox(height: 50),
@@ -198,7 +208,6 @@ class _AddTripScreenState extends State<AddTripScreen> {
                             setState(() {
                               _repeating = result;
                             });
-                            // if (_isEdit) widget._trip!.repeating = result;
                           },
                           items: [
                             const DropdownMenuItem<Repeating>(

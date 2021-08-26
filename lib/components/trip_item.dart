@@ -1,6 +1,8 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:tripawy_demo/notifications/notifications.dart';
 import 'notes_dialog.dart';
 import 'toast.dart';
 import '../constants.dart';
@@ -139,7 +141,15 @@ class TripItem extends StatelessWidget {
                                 AppColors.accentColor,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              AwesomeNotifications().cancelAllSchedules();
+                              // Timer(
+                              //   Duration(seconds: 10),
+                              //   () => context
+                              //       .read(upcommingTripsProv)
+                              //       .deleteTrip(_trip),
+                              // );
+                            },
                             child: Text(
                               "Start",
                               style: _calculateCardTextStyle(cardWidth),
@@ -193,6 +203,8 @@ class TripItem extends StatelessWidget {
     switch (selectedOption) {
       case PopUpOptions.notes:
         {
+          // print('cancel keeeeeeeeey: ${_trip.key}');
+
           Navigator.of(ctx)
               .pushNamed(NotesScreen.routeName, arguments: _trip.key);
         }
@@ -207,11 +219,15 @@ class TripItem extends StatelessWidget {
         }
         break;
       case PopUpOptions.cancel:
-        {}
+        {
+          Notifications.cancelSchedualedNotification(_trip.key);
+          ctx.read(upcommingTripsProv).moveTheTripToHistory(_trip, false);
+        }
         break;
       case PopUpOptions.delete:
         {
           try {
+            Notifications.cancelSchedualedNotification(_trip.key);
             ctx.read(upcommingTripsProv).deleteTrip(_trip);
           } catch (e) {
             print(e);

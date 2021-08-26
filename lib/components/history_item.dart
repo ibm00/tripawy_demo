@@ -26,7 +26,7 @@ class HistoryItem extends StatelessWidget {
                   style: TextStyle(fontSize: 22),
                 ),
                 Text(
-                  _history.state == TripState.Done ? 'Done' : 'Cancelled',
+                  _history.isTripDone! ? 'Done' : 'Cancelled',
                   textAlign: TextAlign.right,
                   style: TextStyle(fontSize: 22),
                 ),

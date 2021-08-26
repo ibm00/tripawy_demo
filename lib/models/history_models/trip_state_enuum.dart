@@ -1,8 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-part 'trip_state_enum.g.dart';
+part 'trip_state_enuum.g.dart';
 
-@HiveType(typeId: 6)
+@HiveType(typeId: 7)
 enum TripState {
   @HiveField(0)
   Done,
@@ -11,4 +11,4 @@ enum TripState {
   Cancelled,
 }
 
-//last used typId is 6
+//last used typId is 7

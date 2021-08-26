@@ -9,7 +9,8 @@ class NotesDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, watch) {
-    List<String?>? notes = watch(upcommingTripsProv).getTripNotes(_key);
+    List<String?>? notes =
+        watch(upcommingTripsProv).getTripNotes(_key) as List<String?>?;
     return Dialog(
       child: SingleChildScrollView(
         child: Column(

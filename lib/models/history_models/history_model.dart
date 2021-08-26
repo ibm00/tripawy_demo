@@ -8,9 +8,9 @@ part 'history_model.g.dart';
 class History extends HiveObject {
   @HiveField(0)
   Trip? trip;
-  @HiveField(2)
-  TripState? state;
-  History({this.trip, this.state});
+  @HiveField(3)
+  bool? isTripDone;
+  History({this.trip, this.isTripDone});
 }
 
 //last used typId is 6

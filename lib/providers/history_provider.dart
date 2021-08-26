@@ -11,65 +11,67 @@ final historyProv = ChangeNotifierProvider((ref) => _HistoryProvider());
 
 class _HistoryProvider extends ChangeNotifier {
   List<History> _pastTrips = [
-    History(
-      trip: Trip(
-        endPoint: "Alex",
-        name: 'Alex',
-        repeating: Repeating.Daily,
-        startDate: DateTime.now(),
-        startPoint: "Cairo",
-        way: Way.Round,
-      ),
-      state: TripState.Cancelled,
-    ),
-    History(
-      trip: Trip(
-        endPoint: "Alex",
-        name: 'Alex',
-        repeating: Repeating.Daily,
-        startDate: DateTime.now(),
-        startPoint: "Cairo",
-        way: Way.Round,
-      ),
-      state: TripState.Done,
-    ),
-    History(
-      trip: Trip(
-        endPoint: "Alex",
-        name: 'Alex',
-        repeating: Repeating.Daily,
-        startDate: DateTime.now(),
-        startPoint: "Cairo",
-        way: Way.Round,
-      ),
-      state: TripState.Cancelled,
-    ),
-    History(
-      trip: Trip(
-        endPoint: "Alex",
-        name: 'Alex',
-        repeating: Repeating.Daily,
-        startDate: DateTime.now(),
-        startPoint: "Cairo",
-        way: Way.Round,
-      ),
-      state: TripState.Cancelled,
-    ),
-    History(
-      trip: Trip(
-        endPoint: "Alex",
-        name: 'Alex',
-        repeating: Repeating.Daily,
-        startDate: DateTime.now(),
-        startPoint: "Cairo",
-        way: Way.Round,
-      ),
-      state: TripState.Cancelled,
-    ),
+    // History(
+    //   trip: Trip(
+    //     endPoint: "Alex",
+    //     name: 'Alex',
+    //     repeating: Repeating.Daily,
+    //     startDate: DateTime.now(),
+    //     startPoint: "Cairo",
+    //     way: Way.Round,
+    //   ),
+    //   state: TripState.Cancelled,
+    // ),
+    // History(
+    //   trip: Trip(
+    //     endPoint: "Alex",
+    //     name: 'Alex',
+    //     repeating: Repeating.Daily,
+    //     startDate: DateTime.now(),
+    //     startPoint: "Cairo",
+    //     way: Way.Round,
+    //   ),
+    //   state: TripState.Done,
+    // ),
+    // History(
+    //   trip: Trip(
+    //     endPoint: "Alex",
+    //     name: 'Alex',
+    //     repeating: Repeating.Daily,
+    //     startDate: DateTime.now(),
+    //     startPoint: "Cairo",
+    //     way: Way.Round,
+    //   ),
+    //   state: TripState.Cancelled,
+    // ),
+    // History(
+    //   trip: Trip(
+    //     endPoint: "Alex",
+    //     name: 'Alex',
+    //     repeating: Repeating.Daily,
+    //     startDate: DateTime.now(),
+    //     startPoint: "Cairo",
+    //     way: Way.Round,
+    //   ),
+    //   state: TripState.Cancelled,
+    // ),
+    // History(
+    //   trip: Trip(
+    //     endPoint: "Alex",
+    //     name: 'Alex',
+    //     repeating: Repeating.Daily,
+    //     startDate: DateTime.now(),
+    //     startPoint: "Cairo",
+    //     way: Way.Round,
+    //   ),
+    //   state: TripState.Cancelled,
+    // ),
   ];
 
   Future<void> fetchPastTrips() async {
     _pastTrips = await HistoryBox.pastTripsInTheBox;
+    print("num of paaaaaast: ${_pastTrips.length}");
+    notifyListeners();
   }
 
   List<History> get pastTrips {

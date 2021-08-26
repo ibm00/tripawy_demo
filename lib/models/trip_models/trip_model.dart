@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hive/hive.dart';
 import 'repeat_enum.dart';
 import 'way_enum.dart';
@@ -20,6 +22,8 @@ class Trip extends HiveObject {
   Way? way;
   @HiveField(6)
   List? notes = [];
+  @HiveField(7)
+  // Timer? timer;
   Trip({
     required this.endPoint,
     required this.name,
@@ -28,6 +32,7 @@ class Trip extends HiveObject {
     required this.startPoint,
     required this.way,
     List<String?>? notes,
+    // timer,
   }) : this.notes = notes ?? [];
 }
 

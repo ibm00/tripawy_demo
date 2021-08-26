@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'trip_state_enum.dart';
+part of 'trip_state_enuum.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -8,7 +8,7 @@ part of 'trip_state_enum.dart';
 
 class TripStateAdapter extends TypeAdapter<TripState> {
   @override
-  final int typeId = 6;
+  final int typeId = 7;
 
   @override
   TripState read(BinaryReader reader) {

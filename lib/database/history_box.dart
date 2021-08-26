@@ -4,8 +4,8 @@ import '../models/history_models/history_model.dart';
 
 class HistoryBox {
   static Future<List<History>> get pastTripsInTheBox async {
-    final _historyBox = await Hive.openBox(
-      'name',
+    final _historyBox = await Hive.openBox<History>(
+      'past_trips',
       compactionStrategy: (entries, deletedEntries) => deletedEntries > 20,
     );
     return _historyBox.values.toList().reversed.toList().cast<History>();
