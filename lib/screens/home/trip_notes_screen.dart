@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../components/note_item.dart';
-import '../../components/note_model_bottom_sheet.dart';
+import 'package:tripawy_demo/components/note_item.dart';
+import 'package:tripawy_demo/components/note_model_bottom_sheet.dart';
 import '../../constants.dart';
 import '../../providers/upcoming_trips_provider.dart';
 

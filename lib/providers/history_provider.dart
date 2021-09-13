@@ -104,4 +104,12 @@ class _HistoryProvider extends ChangeNotifier {
       throw e;
     }
   }
+
+  List? getPastTripNotes(int historyKey) {
+    return _pastTrips
+            .firstWhere((pastTrip) => pastTrip.key == historyKey)
+            .trip!
+            .notes ??
+        [];
+  }
 }

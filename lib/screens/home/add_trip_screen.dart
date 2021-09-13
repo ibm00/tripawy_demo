@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../components/toast.dart';
+import 'package:tripawy_demo/components/toast.dart';
 
 import '../../constants.dart';
 import '../../helpers/validator_helper.dart';

@@ -168,8 +168,8 @@ class TripItem extends StatelessWidget {
                                 onPressed: () {
                                   showDialog(
                                     context: context,
-                                    builder: (context) =>
-                                        NotesDialog(_trip.key),
+                                    builder: (_) =>
+                                        NotesDialog(_trip.key, false),
                                   );
                                 },
                                 icon: Icon(

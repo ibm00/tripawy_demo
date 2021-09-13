@@ -143,9 +143,9 @@ class _UpcommingTripsProv extends ChangeNotifier {
       throw 'this element is not in the box';
     }
     try {
-      UpcommingTripsBox.deleteTripFromBox(trip);
       final index = _trips.indexWhere((tr) => tr.key == trip.key);
       _trips.removeAt(index);
+      UpcommingTripsBox.deleteTripFromBox(trip);
       notifyListeners();
     } catch (e) {
       print(e);
@@ -208,9 +208,9 @@ class _UpcommingTripsProv extends ChangeNotifier {
       if (!Hive.isBoxOpen('past_trips')) {
         await Hive.openBox<History>('past_trips');
       }
+      deleteTrip(trip);
       HistoryBox.addPastTripToBox(History(trip: trip, isTripDone: _isTripDone));
       await _reference.read(historyProv).fetchPastTrips();
-      deleteTrip(trip);
     } catch (e) {
       print(e);
       throw e;
